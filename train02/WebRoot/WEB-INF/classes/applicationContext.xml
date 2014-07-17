@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+	<!-- 通过构造器参数索引方式依赖注入 -->
+	<bean id="byIndex" class="com.shawn.spring.train.HelloImpl">
+		<constructor-arg index="0" value="Hello World!" />
+		<constructor-arg index="1" value="1" />
+	</bean>
+	<!-- 通过构造器参数类型方式依赖注入 -->
+	<bean id="byType" class="com.shawn.spring.train.HelloImpl">
+		<constructor-arg type="java.lang.String" value="Hello World!" />
+		<constructor-arg type="int" value="2" />
+	</bean>
+	<!-- 通过构造器参数名称方式依赖注入 -->
+	<bean id="byName" class="com.shawn.spring.train.HelloImpl">
+		<constructor-arg name="message" value="Hello World!" />
+		<constructor-arg name="index" value="3" />
+	</bean>
+
+	<bean id="setter" class="com.shawn.spring.train.HelloImpl2">
+		<property name="message" value="setter" />
+		<property name="index">
+			<value>1</value>
+		</property>
+	</bean>
+
+	<!-- 为list属性依赖注入 -->
+	<bean id="getlist" class="com.shawn.spring.train.ListTestBean">
+		<property name="values">
+			<list>
+				<value>1</value>
+				<value>2</value>
+				<value>3</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 为map属性依赖注入 -->
+	<bean id="getmap" class="com.shawn.spring.train.MapTestBean">
+		<property name="values">
+			<map key-type="java.lang.String" value-type="java.lang.String">
+				<entry key="a" value="aa" />
+				<entry key="b" value="bb" />
+				<entry key="c" value="cc" />
+			</map>
+		</property>
+	</bean>
+
+	<!-- *****************复杂类型依赖注入************************** -->
+	<!-- Construct List -->
+	<bean id="myList1" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<value>a1</value>
+				<value>a2</value>
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<!-- Construct List -->
+	<bean id="myList2" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<value>b1</value>
+				<value>b2</value>
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<!-- Construct Map -->
+	<bean id="myMap" class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+				<entry key="a" value-ref="myList1" />
+				<entry key="b" value-ref="myList2" />
+			</map>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="complex" class="com.shawn.spring.train.ComplexBean">
+		<property name="complex">
+			<ref bean="myMap"/>
+		</property>
+	</bean>
+</beans>

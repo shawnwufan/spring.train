@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+	<bean id="myAspect" class="com.shawn.spring.aspect.HelloAspect" />
+
+	<aop:config>
+		<!-- <aop:pointcut id="pointcut" expression="execution(* com.shawn.spring..*.*(..))" 
+			/> -->
+		<aop:pointcut id="sayHelloCut"
+			expression="execution(* com.shawn.spring..*.sayHello(..))" />
+		<aop:pointcut id="sayHelloByParamCut"
+			expression="execution(* com.shawn.spring..*.sayHelloByParam(..)) and args(msg)" />
+		<aop:pointcut id="sayHelloReturningCut"
+			expression="execution(* com.shawn.spring..*.sayHelloReturning(..))" />
+
+		<aop:aspect ref="myAspect">
+			<aop:before pointcut-ref="sayHelloCut" method="beforeAdvice" />
+			<aop:after pointcut-ref="sayHelloCut" method="afterAdvice" />
+		</aop:aspect>
+
+		<aop:aspect ref="myAspect">
+			<aop:before pointcut-ref="sayHelloByParamCut" method="beforeAdviceByParam"
+				arg-names="msg" />
+			<aop:after pointcut-ref="sayHelloByParamCut" method="afterAdviceByParam"
+				arg-names="msg" />
+		</aop:aspect>
+
+		<aop:aspect ref="myAspect">
+			<aop:before pointcut-ref="sayHelloReturningCut" method="beforeAdvice" />
+			<aop:after pointcut-ref="sayHelloReturningCut" method="afterAdvice" />
+			<aop:after-returning pointcut-ref="sayHelloReturningCut"
+				method="afterReturningAdvice" arg-names="retVal" returning="retVal" />
+		</aop:aspect>
+	</aop:config>
+
+	<bean id="hello" class="com.shawn.spring.impl.HelloImpl" />
+</beans>
