@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+	http://www.springframework.org/schema/context  
+    http://www.springframework.org/schema/context/spring-context-3.1.xsd 
+	">
+
+	<bean id="user" class="com.shawn.spring.model.User">
+		<property name="name" value="shawn" />
+		<property name="age" value="35" />
+	</bean>
+	<bean id="userManager" class="com.shawn.spring.service.impl.UserManagerImpl">
+		<property name="user" ref="user"></property>
+	</bean>
+
+</beans>

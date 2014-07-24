@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>train02</name>
+	<name>train09</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -32,11 +32,6 @@
 		</buildCommand>
 		<buildCommand>
 			<name>com.genuitec.eclipse.springframework.springbuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
-		<buildCommand>
-			<name>com.genuitec.eclipse.ast.deploy.core.DeploymentBuilder</name>
 			<arguments>
 			</arguments>
 		</buildCommand>
