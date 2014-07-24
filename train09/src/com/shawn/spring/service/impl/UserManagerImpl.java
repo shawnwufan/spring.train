@@ -1,5 +1,7 @@
 package com.shawn.spring.service.impl;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -34,6 +36,15 @@ public class UserManagerImpl implements UserManager {
 
 	}
 
+	@PostConstruct
+	public void init(){
+		System.out.println("Bean初始化成功");
+	}
+	
+	@PreDestroy
+	public void destroy(){
+		System.out.println("Bean销毁成功");
+	}
 //	@Override
 //	public void addUser() {
 //		System.out.println("增加成功");
